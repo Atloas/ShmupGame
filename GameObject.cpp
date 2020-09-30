@@ -2,9 +2,14 @@
 
 #include "Utils.h"
 
-GameObject::GameObject(sf::Vector2f position)
+GameObject::GameObject()
 {
-	setPosition(position);
+	position = sf::Vector3<float>();
+}
+
+GameObject::GameObject(sf::Vector3f position)
+{
+	this->position = position;
 	timer = 0.0f;
 	alive = true;
 }
@@ -29,12 +34,12 @@ void GameObject::setAlive(bool alive)
 	this->alive = alive;
 }
 
-sf::Vector2f GameObject::getPosition()
+sf::Vector3f GameObject::getPosition()
 {
 	return position;
 }
 
-void GameObject::setPosition(sf::Vector2f position)
+void GameObject::setPosition(sf::Vector3f position)
 {
 	this->position.x = position.x;
 	this->position.y = position.y;
@@ -42,10 +47,10 @@ void GameObject::setPosition(sf::Vector2f position)
 
 float GameObject::getHeight()
 {
-	return height;
+	return position.z;
 }
 
 void GameObject::setHeight(float height)
 {
-	this->height = height;
+	this->position.z = height;
 }

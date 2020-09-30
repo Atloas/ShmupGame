@@ -6,7 +6,7 @@
 
 #include "IDs.h"
 
-Explosion::Explosion(sf::Vector2f position, EXPLOSION_SIZE size) : Effect(position)
+Explosion::Explosion(sf::Vector3f position, EXPLOSION_SIZE size) : Effect(position)
 {
 	id = EXPLOSION_ID;
 
@@ -38,10 +38,10 @@ Explosion::Explosion(sf::Vector2f position, EXPLOSION_SIZE size) : Effect(positi
 	opacity = 1.0f;
 	fadeSpeed = 1.0f / fadeTime;
 
-	height += (float)rand() / (float)RAND_MAX;
+	position.z += (float)rand() / (float)RAND_MAX;
 }
 
-Explosion::Explosion(sf::Vector2f position, float radius, float maxRadius, float expansionTime, float duration, float fadeTime) : Effect(position)
+Explosion::Explosion(sf::Vector3f position, float radius, float maxRadius, float expansionTime, float duration, float fadeTime) : Effect(position)
 {
 	id = EXPLOSION_ID;
 
@@ -68,7 +68,7 @@ void Explosion::draw()
 	gluQuadricDrawStyle(quadric, GLU_FILL);
 	gluQuadricNormals(quadric, GLU_SMOOTH);
 	glPushMatrix();
-	glTranslatef(position.x, position.y, height);
+	glTranslatef(position.x, position.y, position.z);
 	glColor4f(1.0f, 0.7f, 0.0f, opacity);
 	gluDisk(quadric, 0.0f, radius, 32, 4);
 	glPopMatrix();

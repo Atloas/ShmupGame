@@ -4,7 +4,7 @@
 
 int main()
 {
-	//Test
+	//TODO: Swap out pointers for references wherever possible
 	Engine engine;
 	engine.run();
 }

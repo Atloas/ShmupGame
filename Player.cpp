@@ -10,11 +10,11 @@
 
 std::vector<sf::Vector3f> Player::model;
 
-Player::Player(sf::Vector2f position, sf::Vector2f direction, Field* playField) : Actor(position, direction)
+Player::Player(sf::Vector3f position, sf::Vector3f direction, Field* playField) : Actor(position, direction)
 {
 	id = PLAYER_ID;
 
-	this->height = 97.0f;
+	this->position.z = 97.0f;
 	this->playField = playField;
 
 	speed = 10.0f;
@@ -46,7 +46,7 @@ std::vector<sf::Vector3f> Player::getModel()
 	return Player::model;
 }
 
-void Player::setDirection(sf::Vector2f direction)
+void Player::setDirection(sf::Vector3f direction)
 {
 	this->direction = direction;
 
@@ -57,7 +57,7 @@ void Player::draw()
 {
 	glColor3f(0.1f, 0.5f, 0.1f);
 	glPushMatrix();
-	glTranslatef(position.x, position.y, height);
+	glTranslatef(position.x, position.y, position.z);
 	glRotatef(rollAngle, 0.0f, 1.0f, 0.0f);
 	glBegin(GL_TRIANGLES);
 	for (unsigned int i = 0; i < Player::model.size(); ++i)
@@ -69,7 +69,7 @@ void Player::draw()
 	glPopMatrix();
 }
 
-Actor* Player::act(float frameTime)
+void Player::act(float frameTime)
 {
 	position += direction * speed * frameTime;
 
@@ -85,22 +85,24 @@ Actor* Player::act(float frameTime)
 	if (shooting && timer > 0.33f)
 	{
 		timer = 0.0f;
-		return new PlayerBullet(this->position, sf::Vector2f(0.0f, 1.0f));
+		//TODO: Spawn bullet event
+		return;
 	}
 
-	return 0;
+	return;
 }
 
-Effect* Player::onCollision(Actor* actor)
+void Player::onCollision(Actor& actor)
 {
+	//Replace with an event
 	--health;
 	if (health > 0)
-		return nullptr;
+		return;
 	else
 	{
 		setActive(false);
 		setAlive(false);
-		return new Explosion(this->position, EXPLOSION_SIZE::LARGE);
+		return;
 	}
 }
 

@@ -2,7 +2,7 @@
 
 #include "Utils.h"
 
-Actor::Actor(sf::Vector2f position, sf::Vector2f direction) : GameObject(position)
+Actor::Actor(sf::Vector3f position, sf::Vector3f direction) : GameObject(position)
 {
 	active = true;
 	collideable = false;
@@ -50,12 +50,12 @@ int Actor::getCollisionGroup()
 	return collisionGroup;
 }
 
-sf::Vector2f Actor::getDirection()
+sf::Vector3f Actor::getDirection()
 {
 	return direction;
 }
 
-void Actor::setDirection(sf::Vector2f direction)
+void Actor::setDirection(sf::Vector3f direction)
 {
 	this->direction = direction;
 	yawAngle = Utils::convertToDegrees(Utils::getAngleFromUpwards(direction));

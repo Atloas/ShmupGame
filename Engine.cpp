@@ -21,8 +21,6 @@ Engine::Engine()
 	timer = 0.0f;
 	srand((unsigned int)time(NULL));
 
-	loadModels(std::string("PLACEHOLDER"));
-
 	context = new sf::ContextSettings(24, 0, 0, 3, 0);
 	window = new sf::RenderWindow(sf::VideoMode(windowWidth, windowHeight), "Projekt - Michal Zbrozek", sf::Style::Titlebar | sf::Style::Close, *context);
 	window->setVerticalSyncEnabled(true);
@@ -45,7 +43,7 @@ Engine::Engine()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	player = new Player(sf::Vector2f(0.0f, -10.0f), sf::Vector2f(0.0f, 0.0f), playField);
+	player = new Player(sf::Vector3f(0.0f, -10.0f, 0.0f), sf::Vector3f(0.0f, 0.0f, 0.0f), playField);
 	hurtFlash = new HurtFlash(0.2f);
 	sea = new Sea(playField, 20, 40);
 	actors.push_back(player);
@@ -126,26 +124,15 @@ void Engine::run()
 						{
 							if (actorA == player || actorB == player)
 								hurtFlash->setOpacity(0.2f);
-							Effect *spawned1 = actorA->onCollision(actorB), *spawned2 = actorB->onCollision(actorA);
-							if (spawned1 != nullptr)
-							{
-								effects.push_back(spawned1);
-							}
-							if (spawned2 != nullptr)
-							{
-								effects.push_back(spawned2);
-							}
 						}
 					}
 				}
 			}
 
-			//Allow objects to act and spawn bullets
+			//Allow objects to act
 			for (unsigned int i = 0; i < actors.size(); i++)
 			{
-				Actor* spawned = actors.at(i)->act(frameTime);
-				if (spawned != nullptr)
-					actors.push_back(spawned);
+				actors.at(i)->act(frameTime);
 			}
 
 			for (unsigned int i = 0; i < effects.size(); i++)
@@ -179,68 +166,6 @@ void Engine::run()
 	}
 }
 
-void Engine::loadModels(std::string folderPath)
-{
-	//Replace with file reading or something?
-	std::vector<sf::Vector3f> playerModel;
-	playerModel.push_back(sf::Vector3f(0.0f, 0.0f, 0.0f));
-	playerModel.push_back(sf::Vector3f(0.0f, 1.0f, 0.0f));
-	playerModel.push_back(sf::Vector3f(-0.5f, -0.5f, 0.0f));
-	playerModel.push_back(sf::Vector3f(0.0f, 0.0f, 0.0f));
-	playerModel.push_back(sf::Vector3f(0.0f, 1.0f, 0.0f));
-	playerModel.push_back(sf::Vector3f(0.5f, -0.5f, 0.0f));
-
-	std::vector<sf::Vector3f> enemyPlaneModel;
-	enemyPlaneModel.push_back(sf::Vector3f(0.0f, 0.0f, 0.0f));
-	enemyPlaneModel.push_back(sf::Vector3f(0.0f, 1.0f, 0.0f));
-	enemyPlaneModel.push_back(sf::Vector3f(-0.5f, -0.5f, 0.0f));
-	enemyPlaneModel.push_back(sf::Vector3f(0.0f, 0.0f, 0.0f));
-	enemyPlaneModel.push_back(sf::Vector3f(0.0f, 1.0f, 0.0f));
-	enemyPlaneModel.push_back(sf::Vector3f(0.5f, -0.5f, 0.0f));
-
-	std::vector<sf::Vector3f> playerBulletModel;
-	playerBulletModel.push_back(sf::Vector3f(0.0f, 0.5f, 0.0f));
-	playerBulletModel.push_back(sf::Vector3f(0.15f, 0.0f, 0.0f));
-	playerBulletModel.push_back(sf::Vector3f(-0.15f, 0.0f, 0.0f));
-
-	std::vector<sf::Vector3f> enemyBulletModel;
-	enemyBulletModel.push_back(sf::Vector3f(0.0f, 0.5f, 0.0f));
-	enemyBulletModel.push_back(sf::Vector3f(0.15f, 0.0f, 0.0f));
-	enemyBulletModel.push_back(sf::Vector3f(-0.15f, 0.0f, 0.0f));
-
-	std::vector<sf::Vector3f> enemyBoatModel;
-	enemyBoatModel.push_back(sf::Vector3f(0.0f, 1.0f, 0.0f));
-	enemyBoatModel.push_back(sf::Vector3f(-1.0f, 0.0f, 0.0f));
-	enemyBoatModel.push_back(sf::Vector3f(1.0f, 0.0f, 0.0f));
-	enemyBoatModel.push_back(sf::Vector3f(-1.0f, 0.0f, 0.0f));
-	enemyBoatModel.push_back(sf::Vector3f(1.0f, 0.0f, 0.0f));
-	enemyBoatModel.push_back(sf::Vector3f(-1.0f, -2.0f, 0.0f));
-	enemyBoatModel.push_back(sf::Vector3f(1.0f, 0.0f, 0.0f));
-	enemyBoatModel.push_back(sf::Vector3f(1.0f, -2.0f, 0.0f));
-	enemyBoatModel.push_back(sf::Vector3f(-1.0f, -2.0f, 0.0f));
-
-	std::vector<sf::Vector3f> enemyTurretModel;
-	enemyTurretModel.push_back(sf::Vector3f(-0.25f, 0.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(0.25f, 0.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(0.25f, 1.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(-0.25f, 0.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(-0.25f, 1.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(0.25f, 1.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(-0.5f, 0.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(0.5f, 0.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(0.5f, -0.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(-0.5f, 0.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(-0.5f, -0.5f, 0.0f));
-	enemyTurretModel.push_back(sf::Vector3f(0.5f, -0.5f, 0.0f));
-
-	Player::setModel(playerModel);
-	EnemyPlane::setModel(enemyPlaneModel);
-	PlayerBullet::setModel(playerBulletModel);
-	EnemyBullet::setModel(enemyBulletModel);
-	EnemyBoat::setModel(enemyBoatModel);
-	EnemyTurret::setModel(enemyTurretModel);
-}
-
 void Engine::start()
 {
 	//Start game from menu
@@ -254,7 +179,7 @@ void Engine::restart()
 
 	timer = 0.0f;
 
-	player = new Player(sf::Vector2f(0.0f, -10.0f), sf::Vector2f(0.0f, 0.0f), playField);
+	player = new Player(sf::Vector3f(0.0f, -10.0f, 0.0f), sf::Vector3f(0.0f, 0.0f, 0.0f), playField);
 	actors.push_back(player);
 }
 
@@ -304,7 +229,7 @@ void Engine::drawPauseScreen()
 
 void Engine::setPlayerDirection(std::vector<char> directionInputs)
 {
-	sf::Vector2f direction;
+	sf::Vector3f direction;
 	for (unsigned int i = 0; i < directionInputs.size(); i++)
 	{
 		switch (directionInputs.at(i))
@@ -340,34 +265,7 @@ bool Engine::checkCollision(Actor* inputA, Actor* inputB)
 	return false;
 }
 
-void Engine::spawnById(int id, sf::Vector2f position, sf::Vector2f direction)
-{
-	//unused
-	Actor* created = nullptr;
-	switch (id)
-	{
-	case ENEMY_PLANE_ID:
-		created = new EnemyPlane(position, direction);
-		break;
-	case PLAYER_BULLET_ID:
-		created = new PlayerBullet(position, direction);
-		break;
-	case ENEMY_BULLET_ID:
-		created = new EnemyBullet(position, direction);
-		break;
-	case PLAYER_EXPLOSION_ID:
-		break;
-	case PLAYER_BULLET_EXPLOSION_ID:
-		break;
-	case ENEMY_PLANE_EXPLOSION_ID:
-		break; 
-	case ENEMY_BULLET_EXPLOSION_ID:
-		break;
-	}
-	if (created != nullptr)
-		actors.push_back(created);
-}
-
+//TODO: Replace wit ha SpawningModule class?
 void Engine::spawnEnemies()
 {
 	if (timer > 1.0f)
@@ -377,11 +275,11 @@ void Engine::spawnEnemies()
 		float randomX = (float)rand()/(float)RAND_MAX*(ENEMY_SPAWN_X_MAX - ENEMY_SPAWN_X_MIN) + ENEMY_SPAWN_X_MIN;
 		if (toSpawn < 0.2f)
 		{
-			actors.push_back(new EnemyBoat(sf::Vector2f(randomX, 24.5f), sf::Vector2f(0.5f, -1.0f), player));
+			//actors.push_back(new EnemyBoat(sf::Vector2f(randomX, 24.5f), sf::Vector2f(0.5f, -1.0f), player));
 		}
 		else
 		{
-			actors.push_back(new EnemyPlane(sf::Vector2f(randomX, 24.5f), sf::Vector2f(0.0f, -1.0f)));
+			//actors.push_back(new EnemyPlane(sf::Vector2f(randomX, 24.5f), sf::Vector2f(0.0f, -1.0f)));
 		}
 	}
 }

@@ -7,11 +7,11 @@
 
 std::vector<sf::Vector3f> PlayerBullet::model;
 
-PlayerBullet::PlayerBullet(sf::Vector2f position, sf::Vector2f direction) : Actor(position, direction)
+PlayerBullet::PlayerBullet(sf::Vector3f position, sf::Vector3f direction) : Actor(position, direction)
 {
 	id = PLAYER_BULLET_ID;
 
-	height = 90.0f;
+	position.z = 90.0f;
 
 	speed = 25.0f;
 
@@ -38,7 +38,7 @@ std::vector<sf::Vector3f> PlayerBullet::getModel()
 void PlayerBullet::draw()
 {
 	glPushMatrix();
-	glTranslatef(position.x, position.y, height);
+	glTranslatef(position.x, position.y, position.z);
 	glBegin(GL_TRIANGLES);
 	glColor3f(0.9f, 0.9f, 0.2f);
 	for (unsigned int i = 0; i < PlayerBullet::model.size(); i++)
@@ -50,11 +50,9 @@ void PlayerBullet::draw()
 	glPopMatrix();
 }
 
-Actor* PlayerBullet::act(float frameTime)
+void PlayerBullet::act(float frameTime)
 {
 	position += direction * speed * frameTime;
-
-	return nullptr;
 }
 
 Effect* PlayerBullet::onCollision(Actor* actor)
@@ -62,5 +60,5 @@ Effect* PlayerBullet::onCollision(Actor* actor)
 	setActive(false);
 	setAlive(false);
 	//return new PlayerBulletExplosion(this->position);
-	return new Explosion(position, EXPLOSION_SIZE::SMALL);
+	return new Explosion(sf::Vector3f(position.x, position.y, 0.0f), EXPLOSION_SIZE::SMALL);
 }

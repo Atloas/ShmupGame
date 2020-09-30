@@ -11,17 +11,17 @@
 class Player : public Actor
 {
 public:
-	Player(sf::Vector2f position, sf::Vector2f direction, Field* playField);
+	Player(sf::Vector3f position, sf::Vector3f direction, Field* playField);
 	virtual ~Player();
 
 	static void setModel(std::vector<sf::Vector3f> model);
 	static std::vector<sf::Vector3f> getModel();
 
-	virtual void setDirection(sf::Vector2f direction);
+	virtual void setDirection(sf::Vector3f direction);
 
 	virtual void draw();
-	virtual Actor* act(float frameTime);
-	virtual Effect* onCollision(Actor* actor);
+	virtual void act(float frameTime);
+	virtual void onCollision(Actor& actor);
 
 	bool getShooting();
 	void setShooting(bool shooting);

@@ -6,14 +6,14 @@
 class Actor : public GameObject
 {
 public:
-	Actor(sf::Vector2f position, sf::Vector2f direction);
+	Actor(sf::Vector3f position, sf::Vector3f direction);
 	virtual ~Actor();
 
-	virtual Effect* onCollision(Actor* actor) = 0;
-	virtual Actor* act(float frameTime) = 0;
+	virtual void onCollision(Actor& other) = 0;
+	virtual void act(float frameTime) = 0;
 
-	virtual sf::Vector2f getDirection();
-	virtual void setDirection(sf::Vector2f direction);
+	virtual sf::Vector3f getDirection();
+	virtual void setDirection(sf::Vector3f direction);
 
 	virtual float getYawAngle();
 	virtual void setYawAngle(float yawAngle);
@@ -35,7 +35,7 @@ public:
 	virtual void setCollideable(bool collideable);
 
 protected:
-	sf::Vector2f direction;
+	sf::Vector3f direction;
 	float yawAngle;
 	float speed;
 

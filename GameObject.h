@@ -10,7 +10,6 @@
 class GameObject
 {
 public:
-	GameObject(sf::Vector2f position);
 	virtual ~GameObject();
 
 	virtual void draw() = 0;
@@ -20,18 +19,20 @@ public:
 	virtual bool getAlive();
 	virtual void setAlive(bool alive);
 
-	virtual sf::Vector2f getPosition();
-	virtual void setPosition(sf::Vector2f postition);
+	virtual sf::Vector3f getPosition();
+	virtual void setPosition(sf::Vector3f postition);
 
 	virtual float getHeight();
 	virtual void setHeight(float height);
 
 protected:
+	GameObject();
+	GameObject(sf::Vector3f position);
+
 	int id;
 	bool alive;
 
-	sf::Vector2f position;
-	float height;			//Height for display purposes only
+	sf::Vector3f position;	//Z for display purposes only
 
 	float timer;
 };

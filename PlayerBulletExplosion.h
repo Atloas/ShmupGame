@@ -5,7 +5,7 @@
 class PlayerBulletExplosion : public Effect
 {
 public:
-	PlayerBulletExplosion(sf::Vector2f position);
+	PlayerBulletExplosion(sf::Vector3f position);
 	virtual ~PlayerBulletExplosion();
 
 	void draw();

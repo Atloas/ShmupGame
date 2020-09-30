@@ -5,7 +5,7 @@
 class Effect : public GameObject
 {
 public:
-	Effect(sf::Vector2f position);
+	Effect(sf::Vector3f position);
 	virtual ~Effect();
 
 	virtual void draw() = 0;

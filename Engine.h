@@ -12,11 +12,8 @@
 #include "GameObject.h"
 #include "Actor.h"
 #include "Effect.h"
+#include "Enemy.h"
 #include "Player.h"
-#include "EnemyPlane.h"
-#include "PlayerBullet.h"
-#include "EnemyBullet.h"
-#include "EnemyBoat.h"
 #include "Sea.h"
 #include "Field.h"
 #include "HurtFlash.h"
@@ -30,8 +27,6 @@ public:
 	void run();
 
 private:
-	void loadModels(std::string folderPath);
-
 	void start();
 	void restart();
 	void drawScene();

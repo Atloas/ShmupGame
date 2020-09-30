@@ -1,8 +1,8 @@
 #include "Effect.h"
 
-Effect::Effect(sf::Vector2f position) : GameObject(position)
+Effect::Effect(sf::Vector3f position) : GameObject(position)
 {
-	height = 70.0f;
+	position.z = 70.0f;
 }
 
 Effect::~Effect()

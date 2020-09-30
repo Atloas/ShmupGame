@@ -5,7 +5,7 @@
 
 #include "IDs.h"
 
-PlayerBulletExplosion::PlayerBulletExplosion(sf::Vector2f position) : Effect(position)
+PlayerBulletExplosion::PlayerBulletExplosion(sf::Vector3f position) : Effect(position)
 {
 	id = PLAYER_BULLET_EXPLOSION_ID;
 }
@@ -22,7 +22,7 @@ void PlayerBulletExplosion::draw()
 	gluQuadricDrawStyle(quadric, GLU_FILL);
 	gluQuadricNormals(quadric, GLU_SMOOTH);
 	glPushMatrix();
-	glTranslatef(position.x, position.y, height);
+	glTranslatef(position.x, position.y, position.z);
 	glColor3f(1.0f, 0.7f, 0.0f);
 	gluSphere(quadric, 0.5f, 8, 8);
 	glPopMatrix();

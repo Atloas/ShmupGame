@@ -15,8 +15,8 @@ public:
 	static sf::Vector2f normalizeVector(sf::Vector2f input);
 	static sf::Vector3f normalizeVector(sf::Vector3f input);
 
-	static float getAngleFromUpwards(sf::Vector2f input);
-	static float getAngleFromVector(sf::Vector2f inputA, sf::Vector2f inputB);
+	static float getAngleFromUpwards(sf::Vector3f input);
+	static float getAngleFromVector(sf::Vector3f inputA, sf::Vector3f inputB);
 
 	static float convertToRadian(float input);
 	static float convertToDegrees(float input);

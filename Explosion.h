@@ -12,8 +12,8 @@ enum EXPLOSION_SIZE
 class Explosion : public Effect
 {
 public:
-	Explosion(sf::Vector2f position, EXPLOSION_SIZE size);
-	Explosion(sf::Vector2f position, float radius, float maxRadius, float expansionTime, float duration, float fadeTime);
+	Explosion(sf::Vector3f position, EXPLOSION_SIZE size);
+	Explosion(sf::Vector3f position, float radius, float maxRadius, float expansionTime, float duration, float fadeTime);
 	virtual ~Explosion();
 
 	void draw();

@@ -17,6 +17,11 @@ bool Field::checkIfInside(sf::Vector2f position)
 	return position.x >= xMin && position.x <= xMax && position.y >= yMin && position.y <= yMax;
 }
 
+bool Field::checkIfInside(sf::Vector3f position)
+{
+	return position.x >= xMin && position.x <= xMax && position.y >= yMin && position.y <= yMax;
+}
+
 sf::Vector2f Field::clampVector(sf::Vector2f input)
 {
 	if (input.x < xMin)

@@ -21,7 +21,7 @@ sf::Vector3f Utils::normalizeVector(sf::Vector3f input)
 }
 
 //Returns RADIANS, glRotatef takes DEGREES
-float Utils::getAngleFromUpwards(sf::Vector2f input)
+float Utils::getAngleFromUpwards(sf::Vector3f input)
 {
 	if (fabs(input.x) < 1e-6f && fabs(input.y) < 1e-6f)		//Zero vector
 		return 0.0f;
@@ -29,7 +29,7 @@ float Utils::getAngleFromUpwards(sf::Vector2f input)
 	sf::Vector2f upwards;
 	upwards.x = 0.0f;
 	upwards.y = 1.0f;
-	float dotProduct = vectorDotProcuct2(input, upwards);
+	float dotProduct = vectorDotProcuct2(sf::Vector2f(input.x, input.y), upwards);
 	if (fabs(dotProduct) < 1e-6f)							//If the vectors are perpendicular
 	{
 		if (input.x < 0)
@@ -48,7 +48,7 @@ float Utils::getAngleFromUpwards(sf::Vector2f input)
 
 
 //Might be wrong
-float Utils::getAngleFromVector(sf::Vector2f inputA, sf::Vector2f inputB)
+float Utils::getAngleFromVector(sf::Vector3f inputA, sf::Vector3f inputB)
 {
 	float angleA = getAngleFromUpwards(inputA);
 	float angleB = getAngleFromUpwards(inputB);

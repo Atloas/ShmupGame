@@ -10,6 +10,7 @@ public:
 	~Field();
 
 	bool checkIfInside(sf::Vector2f position);
+	bool checkIfInside(sf::Vector3f position);
 
 	sf::Vector2f clampVector(sf::Vector2f input);
 	sf::Vector3f clampVector(sf::Vector3f input);

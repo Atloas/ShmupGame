@@ -7,14 +7,14 @@
 class PlayerBullet : public Actor
 {
 public:
-	PlayerBullet(sf::Vector2f position, sf::Vector2f direction);
+	PlayerBullet(sf::Vector3f position, sf::Vector3f direction);
 	virtual ~PlayerBullet();
 
 	static void setModel(std::vector<sf::Vector3f> model);
 	static std::vector<sf::Vector3f> getModel();
 
 	virtual void draw();
-	virtual Actor* act(float frameTime);
+	virtual void act(float frameTime);
 	virtual Effect* onCollision(Actor* actor);
 
 private:
