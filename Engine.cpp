@@ -5,8 +5,10 @@
 #include <algorithm>
 
 #include "Utils.h"
-#include "IDs.h"
+#include "OBJECT_ID.h"
 #include "Config.h"
+#include "Enemy.h"
+#include "ModelManager.h"
 
 Engine::Engine()
 {
@@ -43,6 +45,7 @@ Engine::Engine()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	ModelManager::generateModels();
 	player = new Player(sf::Vector3f(0.0f, -10.0f, 0.0f), sf::Vector3f(0.0f, 0.0f, 0.0f), playField);
 	hurtFlash = new HurtFlash(0.2f);
 	sea = new Sea(playField, 20, 40);
@@ -69,6 +72,8 @@ void Engine::run()
 {
 	std::vector<char> directionInputs;
 	
+	actors.push_back(EnemyFactory::getEnemy(sf::Vector3f(), sf::Vector3f(0, -1, 0), OBJECT_ID::ENEMY_PLANE));
+
 	running = true;
 	while (running)
 	{
@@ -95,6 +100,7 @@ void Engine::run()
 				restart();
 		}
 
+		//TODO: Replace with handleInput() method
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 			directionInputs.push_back('A');
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))

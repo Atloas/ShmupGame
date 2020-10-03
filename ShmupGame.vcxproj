@@ -111,6 +111,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Behaviours.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine.cpp" />
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Behaviours.h" />
     <ClInclude Include="CollisionGroups.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Effect.h" />
@@ -139,7 +141,7 @@
     <ClInclude Include="Field.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="HurtFlash.h" />
-    <ClInclude Include="IDs.h" />
+    <ClInclude Include="OBJECT_ID.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelManager.h" />
     <ClInclude Include="Player.h" />

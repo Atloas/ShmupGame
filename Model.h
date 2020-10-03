@@ -16,6 +16,9 @@ public:
 
 private:
 	int id;
+	//TODO: Implement support for various model parts in different colours
+	//TODO: std::vector<sf::Vector3f> colours;
+	//TODO: std::vector<std::vector<sf::Vector3f>> elements;
 	sf::Vector3f colour;
 	std::vector<sf::Vector3f> vertices;
 };

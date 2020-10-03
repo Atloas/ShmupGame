@@ -5,7 +5,7 @@
 class ModelManager
 {
 public:
-	static Model getModel(int id);
+	static Model& getModel(int id);
 	static void generateModels();
 
 private:

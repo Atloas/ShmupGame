@@ -9,11 +9,11 @@ std::vector<sf::Vector3f> PlayerBullet::model;
 
 PlayerBullet::PlayerBullet(sf::Vector3f position, sf::Vector3f direction) : Actor(position, direction)
 {
-	id = PLAYER_BULLET_ID;
+	id = OBJECT_ID::PLAYER_BULLET;
 
 	position.z = 90.0f;
 
-	speed = 25.0f;
+	moveSpeed = 25.0f;
 
 	collisionRadius2 = 0.125f;
 	collisionIdentifier = PLAYER_BULLET_GROUP;
@@ -52,7 +52,7 @@ void PlayerBullet::draw()
 
 void PlayerBullet::act(float frameTime)
 {
-	position += direction * speed * frameTime;
+	position += direction * moveSpeed * frameTime;
 }
 
 Effect* PlayerBullet::onCollision(Actor* actor)

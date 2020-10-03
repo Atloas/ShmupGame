@@ -1,13 +1,21 @@
 #include "Weapon.h"
 
-
-
-Weapon::Weapon()
+Weapon::Weapon(sf::Vector3f position, sf::Vector3f direction) : Actor(position, direction)
 {
-	//Initialize model and other things based on type
 }
 
-
 Weapon::~Weapon()
+{
+}
+
+void Weapon::draw()
+{
+}
+
+void Weapon::onCollision(Actor & other)
+{
+}
+
+void Weapon::act(float frameTime)
 {
 }

@@ -4,7 +4,7 @@
 #include <SFML\System\Vector2.hpp>
 #include <vector>
 
-#include "IDs.h"
+#include "OBJECT_ID.h"
 #include "CollisionGroups.h"
 
 class GameObject

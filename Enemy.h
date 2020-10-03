@@ -1,53 +1,43 @@
 #pragma once
+
 #include "Actor.h"
 #include "Weapon.h"
+#include "Model.h"
+#include "OBJECT_ID.h"
 
 #include <SFML\System\Vector2.hpp>
-
-enum ENEMY_TYPE
-{
-	PLANE,
-	BOAT
-};
 
 class Enemy :
 	public Actor
 {
 public:
-	Enemy(sf::Vector3f position, sf::Vector3f direction, ENEMY_TYPE type, std::vector<sf::Vector3f>* model);
+	Enemy(sf::Vector3f position, sf::Vector3f direction, OBJECT_ID id, Model& model);
+	Enemy(sf::Vector3f position, sf::Vector3f direction, OBJECT_ID id, Model& model, std::vector<void(*)(Enemy&, float)> behaviours);
 	virtual ~Enemy();
 
-	void act(float frameTime);
-	void onCollision(Actor& other);
-	void draw();
+	void setBehaviours(std::vector<void(*)(Enemy&, float)> behaviours);
+	std::vector<void(*)(Enemy&, float)> getBehaviours();
+
+	virtual void act(float frameTime) override;
+	virtual void onCollision(Actor& other) override;
+	virtual void draw() override;
 
 private:
+	OBJECT_ID id;
 	sf::Vector2<float> direction;
-	ENEMY_TYPE type;
-	void (*behaviour)(Enemy& subject);
 
-	//TODO: Model& model;
-	std::vector<sf::Vector3f>& model;
+	std::vector<void (*)(Enemy&, float)> behaviours;
+
+	Model& model;
 	std::vector<Weapon> weapons;
 
 };
 
-//TODO: replace with EnemyFactory
-class EnemyBuilder
+class EnemyFactory
 {
 public:
-	EnemyBuilder();
-
-	EnemyBuilder& setPosition(sf::Vector3f position);
-	EnemyBuilder& setDirection(sf::Vector3f direction);
-	EnemyBuilder& setType(ENEMY_TYPE type);
-	EnemyBuilder& setModel(std::vector<sf::Vector3f>* model);
-
-	Enemy build();
+	static Enemy* getEnemy(sf::Vector3f position, sf::Vector3f direction, OBJECT_ID id);
 
 private:
-	sf::Vector3f position;
-	sf::Vector3f direction;
-	ENEMY_TYPE type;
-	std::vector<sf::Vector3f>* model;
+	EnemyFactory();
 };

@@ -18,8 +18,8 @@ public:
 	virtual float getYawAngle();
 	virtual void setYawAngle(float yawAngle);
 
-	virtual float getSpeed();
-	virtual void setSpeed(float speed);
+	virtual float getMoveSpeed();
+	virtual void setMoveSpeed(float speed);
 
 	virtual float getCollisionRadius2();
 	virtual int getCollisionIdentifier();
@@ -37,7 +37,7 @@ public:
 protected:
 	sf::Vector3f direction;
 	float yawAngle;
-	float speed;
+	float moveSpeed;
 
 	float collisionRadius2;
 	int collisionIdentifier;

@@ -4,11 +4,11 @@
 #include <gl\GLU.h>
 #include <cstdlib>
 
-#include "IDs.h"
+#include "OBJECT_ID.h"
 
 Explosion::Explosion(sf::Vector3f position, EXPLOSION_SIZE size) : Effect(position)
 {
-	id = EXPLOSION_ID;
+	id = OBJECT_ID::EXPLOSION;
 
 	switch (size)
 	{
@@ -43,7 +43,7 @@ Explosion::Explosion(sf::Vector3f position, EXPLOSION_SIZE size) : Effect(positi
 
 Explosion::Explosion(sf::Vector3f position, float radius, float maxRadius, float expansionTime, float duration, float fadeTime) : Effect(position)
 {
-	id = EXPLOSION_ID;
+	id = OBJECT_ID::EXPLOSION;
 
 	this->radius = radius;
 	this->maxRadius = maxRadius;

@@ -12,12 +12,12 @@ std::vector<sf::Vector3f> Player::model;
 
 Player::Player(sf::Vector3f position, sf::Vector3f direction, Field* playField) : Actor(position, direction)
 {
-	id = PLAYER_ID;
+	id = OBJECT_ID::PLAYER;
 
 	this->position.z = 97.0f;
 	this->playField = playField;
 
-	speed = 10.0f;
+	moveSpeed = 10.0f;
 	rollAngle = 0.0f;
 	maxRollAngle = 30.0f;
 	desiredRollAngle = 0.0f;
@@ -71,7 +71,7 @@ void Player::draw()
 
 void Player::act(float frameTime)
 {
-	position += direction * speed * frameTime;
+	position += direction * moveSpeed * frameTime;
 
 	if (!playField->checkIfInside(position))
 		position = playField->clampVector(position);

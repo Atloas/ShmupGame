@@ -3,11 +3,11 @@
 #include <SFML\OpenGL.hpp>
 #include <gl\GLU.h>
 
-#include "IDs.h"
+#include "OBJECT_ID.h"
 
 PlayerBulletExplosion::PlayerBulletExplosion(sf::Vector3f position) : Effect(position)
 {
-	id = PLAYER_BULLET_EXPLOSION_ID;
+	id = OBJECT_ID::PLAYER_BULLET_EXPLOSION;
 }
 
 

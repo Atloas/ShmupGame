@@ -25,14 +25,14 @@ void Actor::setYawAngle(float yawAngle)
 	this->yawAngle = yawAngle;
 }
 
-float Actor::getSpeed()
+float Actor::getMoveSpeed()
 {
-	return speed;
+	return moveSpeed;
 }
 
-void Actor::setSpeed(float speed)
+void Actor::setMoveSpeed(float moveSpeed)
 {
-	this->speed = speed;
+	this->moveSpeed = moveSpeed;
 }
 
 float Actor::getCollisionRadius2()
@@ -57,8 +57,8 @@ sf::Vector3f Actor::getDirection()
 
 void Actor::setDirection(sf::Vector3f direction)
 {
-	this->direction = direction;
-	yawAngle = Utils::convertToDegrees(Utils::getAngleFromUpwards(direction));
+	this->direction = Utils::normalizeVector(direction);
+	//yawAngle = Utils::convertToDegrees(Utils::getAngleFromUpwards(direction));
 }
 
 int Actor::getHealth()
